@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/tinokoci/poem/issues"
   },
-  "homepage": "https://github.com/tinokoci/poem#readme"
+  "homepage": "https://github.com/tinokoci/poem#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
