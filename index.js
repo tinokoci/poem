@@ -1,19 +1,33 @@
 import http from "http";
+import fs from "fs";
 
-let state = {
-  count: 0,
-};
-
-const server = http.createServer((req, res) => {
-  console.log(`Got a request with url: ${req.url}`);
-
-  if (req.url !== "/favicon.ico") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    const html = `<html><head></head><title>hello!</title><body>sup! your path: ${req.url}<br>Site accessed: ${++state.count} times</body></html>`;
-    res.end(html);
-    console.log(`Sent a response back to the url : ${req.url}`)
-  }
-});
-
+const server = http.createServer(handleRequest);
 server.listen(5000);
+
+function handleRequest(req, res) {
+  const url = req.url;
+
+  if (url.endsWith(".css")) {
+    const fileName = extractFileNameFromUrl(url);
+    fs.readFile(`./public/${fileName}`, (err, data) => {
+      res.writeHead(200, { "Content-Type": "text/css" });
+      res.end(data);
+      console.log(`Sent a response back to the request url "${url}" with a css file`)
+    });
+  }
+  else if (url !== "/favicon.ico") {
+    fs.readFile("./public/index.html", (err, data) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(data);
+      console.log(`Sent a response back to the request url "${url}" with an html file`)
+    });
+  }
+}
+
+function extractFileNameFromUrl(url) {
+  const parts = url.split("/");
+  const length = parts.length;
+  if (length <= 1) return url;
+  return parts[length - 1];
+}
 
