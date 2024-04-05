@@ -1,0 +1,21 @@
+{
+  "name": "poem",
+  "version": "1.0.0",
+  "description": "web server",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"testing not supported yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinokoci/poem.git"
+  },
+  "author": "tinokoci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tinokoci/poem/issues"
+  },
+  "homepage": "https://github.com/tinokoci/poem#readme"
+}
